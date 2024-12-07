@@ -28,16 +28,164 @@
       .form-control 
       {
             color: white !important;
-            background: rgba(60, 60, 60, 0.5) !important;
-            border: 0px !important;
+            background: rgba(52, 52, 52, 0.5) !important;
+            border: 0px !important; border-radius: 2rem; height: 2.5rem;
             outline: none !important;
+            
+      }
+      .form-control::placeholder {
+            color: rgb(109, 109, 109) !important;
       }
 </style>
+<style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: Arial, sans-serif;
+      }
+
+      .invoice {
+          background: #ffffff;
+          width: 800px;
+          padding: 20px;
+          border-radius: 20px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          color: black;
+      }
+      .header, .footer {
+          text-align: center;
+          margin-bottom: 20px;
+      }
+      .header img {
+          max-width: 200px;
+          /* margin-bottom: 10px; */
+      }
+      .details {
+          margin-bottom: 20px;
+      }
+      .details p {
+          font-size: 14px;
+          margin-bottom: 5px;
+      }
+      .table-container {
+          margin-bottom: 20px;
+      }
+      table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+      table th, table td {
+          text-align: left;
+          border: 1px solid #f0f0f0;
+          padding: 10px;
+          font-size: 14px;
+      }
+      table th {
+          background: #f0f0f0;
+          font-weight: bold;
+      }
+      .observations {
+          margin-bottom: 20px;
+      }
+      .observations textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #e7e7e7;
+          background-color: #f0f0f0;
+          border-radius: 1rem;
+          font-size: 14px;
+          resize: none;
+      }
+      .totals {
+          text-align: right;
+      }
+      .totals p {
+          font-size: 14px;
+          margin-bottom: 5px;
+      }
+      .totals p span {
+          font-weight: bold;
+      }
+  </style>
 <input type="number" value='{{sale.id}}' class='d-none' id='saled_id'>
 <section class="vh-100 bg-black   bg-opacity-50 blur overflow-scroll detail-c">
-      
+
       {% include "citas/components/nav.html" %}
-      <div class="p-3 pb-0">
+
+
+
+      <div class="invoice position-absolute  d-none  z-2">
+            <div class="header  d-flex  m-0   p-0 position-relative" style="height: 9rem;">
+                  {% if company.logo.url %}
+                  <img src="{{company.logo.url}}"  class="object-fit-cover position-absolute   start-0"  width="150"  alt="Click Estudios">
+            {% endif %}
+            </div>
+            <div class="details d-flex   flex-wrap m-0 mb-2 " style="margin-top: 0rem !important;">
+
+                        <p class="w-100" style="font-size: 14px !important;"><strong>RNC:</strong> 133-22445-3</p>
+                        <p class="w-100" style="font-size: 14px !important;"><strong>Fecha:</strong>  <span class="date text-black"> </span> </p>
+                        <p class="w-100" style="font-size: 14px !important;"><strong>Cliente:</strong> {{ sale.cliente.name }} </p>
+                        <p class="w-100" style="font-size: 14px !important;"><strong>RNC Cliente:</strong> 131-24041-2</p>
+                        <p class="w-100" style="font-size: 14px !important;"><strong>NCF:</strong> B0100000001</p>
+                        <p class="w-100" style="font-size: 14px !important;"><strong>NCF Válido hasta:</strong> 31/12/2026</p>
+                        <p class="w-100" style="font-size: 14px !important;"><strong>Factura ID:</strong> CL-00001</p>
+            </div>
+            
+            <div class="w-100 text-center credito-fiscal ">
+                  <hr class='m-0 p-0 mb-1 '>
+                  <p  style="font-size: 14px !important;" class='p-0 m-0'>Válido para crédito fiscal</p>
+                  <hr class='m-0 p-0 mb-4 mt-1'>
+              </div>
+            <div class="table-container"  style="font-size: 14px !important;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="font-size: 14px !important;">CANTIDAD</th>
+                            <th style="font-size: 14px !important;">DESCRIPCIÓN</th>
+                            <th style="font-size: 14px !important;">PRECIO UNITARIO</th>
+                            <th style="font-size: 14px !important;">ITBIS</th>
+                            <th style="font-size: 14px !important;">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Sesión de fotos con modelos</td>
+                            <td>$7,203.39</td>
+                            <td>$1,296.61</td>
+                            <td>$8,500.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="observations w-100">
+                <p class="m-0"><strong style="font-size: 13px;">Observaciones</strong></p>
+                <textarea rows="9"  placeholder="Escribe tus observaciones aquí… ¡Queremos escucharte!"></textarea>
+            </div>
+            <div class="totals d-flex justify-content-end" >
+                  <table style="border-collapse: collapse; width: 12rem; font-family: Arial, sans-serif;"
+                  >
+                        <tbody>
+                            <tr>
+                                <td style="padding: 8px; font-weight: bold; color: black;">Neto</td>
+                                <td style="padding: 8px; text-align: right;">$7,203.39</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; font-weight: bold; color: black;">ITBIS</td>
+                                <td style="padding: 8px; text-align: right;">$1,296.61</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; font-weight: bold; color: black;">Total</td>
+                                <td style="padding: 8px; text-align: right;">$8,500.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+        
+        </div>
+
+      <div data-aos="fade-up" class="p-3   pb-0">
             <div>
                   <h6 class='p-0 m-0 mt-4'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -56,7 +204,7 @@
                   <div class='p-3 m-1 w-100 bg-white ms-3 overflow-scroll bg-opacity-10 rounded-5' style='height: 11.5rem !important;'>
                         <h6 class='p-0 m-0  text-white-50 mt-3'> 
                               Opciones selecionadas
-                        </h6>
+                        </h6> 
 
                         <div class='w-100 rounded-4 p-2'>
                               <table class="w-100">
@@ -95,47 +243,86 @@
                   </span> {% endcomment %}
             {% endif %}
             </div>
-            <div>
-                  <div>
-                        <!-- <h6 class='p-0 m-0 mt-4'>
-                              Paquetes de opciones
-                        </h6> -->
-                        <p class='text-white-50 mt-2'
-                        style="font-size: 14px;">
-                              Selecciona los paquetes de opciones que deseas agregar a la cita seleccionada
-                        </p>
-                  </div>
+            <div class="p-2">
+
                   <div class='d-flex overflow-scroll'>
                         {% if pack_options %}
+                        <div>
+                              <!-- <h6 class='p-0 m-0 mt-4'>
+                                    Paquetes de opciones
+                              </h6> -->
+                              <p class='text-white-50 mt-2'
+                              style="font-size: 14px;">
+                                    Selecciona los paquetes de opciones que deseas agregar a la cita seleccionada
+                              </p>
+                        </div>
                               {% include "citas/administration/pack_options.html" %}
                               {% else %}
-                              <span class='ms-3'>
+                              <span class=' mt-3'>
                                     !No hay paquetes de opciones disponibles <a class='text-primary' href="{% url "citas:pack-opciones-create" %}"> Crear paquetes de adicionales <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right-circle-fill" viewBox="0 0 16 16">
                                           <path d="M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8m5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707z"/>
                                         </svg> </a>
-                              </span>
+                                        <br>
+                                        <p class="text-white-50" style="font-size: 14px;">
+                                              ¡Crea hasta 10 paquetes de opcionales y sorprende a tus clientes ofreciendo lo mejor de cada plan a un precio único! 🎉✨ <br> ¡Es tu oportunidad de destacar y brindarles valor como nunca antes! 🚀
+                                          </p>
+                                    </span> 
                         {% endif %}
                   </div>
                   <div>
                         {% if sale.saled_end == False %}
-                              <button style="font-size: 14px;"  class=" btn-opcions border-0 bg-white bg-opacity-10 p-2 pe-3 ps-3">
-                                    Crear adicional 
+                        <h6>  Adicionales unicos para cada venta! </h6>
+                        <p  data-aos="face-in" class="text-white-50 " style="font-size: 14px; transition-delay: 2s !important;">
+                              <span class="p-opcion text-white-50 "></span>
+                              <!-- Personaliza cada venta con adicionales únicos y adapta el precio fácilmente según lo que incluyas. ¡Flexibilidad total para ti y tus clientes!  <br> <strong> --> <br>
+                                    Ofréceles exactamente lo que desean  💡✨ 
+                              </strong>
+                    
+                              <button style="font-size: 14px;"  class=" border-0 bg-white bg-opacity-10 p-2 pe-3 ps-3">
+                                    <a class='text-white-50  btn-opcions' style="cursor: pointer; font-weight: bold;" > Crear adicional</a>
                               </button>
+                          </p>
+                          
                         {% endif %}
                   </div>
             </div>
+            <script>
+                  	window.onload = setRandomText()
+
+                  function setRandomText() {
+  const messages = [
+    "Ofrece a tus clientes la posibilidad de personalizar sus compras con extras únicos, ajustando el precio sin complicaciones. ¡Todo a su medida!",
+    "Haz cada venta especial con opciones adicionales personalizadas y precios que se ajustan perfectamente a lo que ofreces. ¡Comodidad y creatividad en uno!",
+    "Agrega un toque único a cada venta con extras personalizados y precios flexibles que se adaptan a tus clientes. ¡La clave está en la personalización!",
+    "Diseña ventas a medida con opciones adicionales exclusivas y ajusta los precios según lo que incluyas.   ¡Sorprende y destaca con flexibilidad total!",
+    "Personaliza cada venta con adicionales únicos y adapta el precio fácilmente según lo que incluyas. ¡Flexibilidad total para ti y tus clientes!",
+
+  ];
+  
+  // Selecciona un mensaje aleatorio
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  
+  // Inserta el mensaje en el elemento con clase .p-opcion
+  const element = document.querySelector('.p-opcion');
+  if (element) {
+    element.textContent = randomMessage;
+  }
+}
+
+// Llamar a la funci
+            </script>
         
 
             
             {% comment %} <div class="alert alert-warning border-0 position-absolute top-0  bg-black text-white end-50 z-10" role="alert">
                   <strong>Advertencia</strong> <p class='text-white-50' style='font-size:14px;'>Asegúrate de revisar todas las opciones antes de aplicar los cambios, una vez haces clien en el botón "Aplicar y terminar" no podrás hacer cambios.</p>
             </div> {% endcomment %}
-            <div class="position-relative bg-white bg-opacity-10 w-100 mt-5 p-2 rounded-5   bottom-0   start-0"
-            style='  '>
+            <div class="position-relative bg-white bg-opacity-10 w-100 mt-2  p-2 rounded-5   bottom-0   start-0"
+            style=' max-height: 15rem; '>
                   {% if sale.saled_end == False %}
                   <div class="card  bg-transparent  border-0  rounded-4 m-1 start-0 w-100  text-white ">
                         <div class="card-body">
-                              <p class='text-white-50' style='font-size:14px;'>Asegúrate de revisar todas las opciones antes de aplicar los cambios, una vez haces clien en el botón "Aplicar y terminar" no podrás hacer cambios.</p>
+                              <!-- <p class='text-white-50' style='font-size:14px;'>Asegúrate de revisar todas las opciones antes de aplicar los cambios, una vez haces clien en el botón "Aplicar y terminar" no podrás hacer cambios.</p> -->
                               <h5 class="card-title m-0 p-0">
                                     Vendido por: ${{total_plan|intcomma}}.00 </h5>
                                     {% if options_total > 0 %}
@@ -147,9 +334,10 @@
                                     <form action="" method="post">
                                           {% csrf_token %}
                                           <button id="apply-btn" 
-                                          style='font-size: 14px;'
-                                          class="btn mt-3 text-white rounded-5 bg-white bg-opacity-10">
-                                          Aplicar y terminar</button>
+                                          style='font-size: 14px; font-weight: bold;'
+                                          class="btn mt-3 text-white rounded-5 bg-black bg-opacity-10">
+                                          Terminar 
+                                    </button>
                                     </form>
                         </div>
                   </div>
@@ -176,10 +364,14 @@
                         <div>
 
                               <div class="d-flex justify-content-end mt-3">
-                                    <button id="print-invoice-btn" 
+                                    <button onclick="printInvoice()" id="print-invoice-btn" 
                                     style='font-size: 14px;'
                                     class="btn text-white rounded-5 bg-white bg-opacity-10 me-2">
-                                    Imprimir factura</button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                                          <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1"/>
+                                          <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                                        </svg>
+                                    Imprimir factura</button>  
                                     
                                     <button id="send-invoice-btn" 
                                     style='font-size: 14px;'
@@ -197,37 +389,77 @@
       
 
 
-      <div id="optionModal2" class="d-none position-fixed top-0 start-0 w-100 vh-100 bg-black bg-opacity-50 d-flex justify-content-center align-items-center">
-            <div class="bg-black rounded-3 p-4 " style="width: 90%; max-width: 500px; z-index: 1000;">
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="modal-title">Crear nueva opción</h5>
+      <div id="optionModal2" class=" d-none position-fixed top-0 start-0 w-100 vh-100 bg-transparent d-flex justify-content-center align-items-center">
+            <div class="bg-black bg-opacity-75  rounded-5 p-5   position-relative" style="width: 90%; max-width: 700px; z-index: 1000;      
+             -webkit-backdrop-filter: blur(10px) !important;
+      backdrop-filter: blur(10px) !important;">
+                  <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <h5 class="modal-title"> ¡Haz realidad tus ideas! 🌟 </h5> <br>
+                        <p class="text-white-50">
+                              ¡Diseña adicionales a medida para cada venta y define el precio ideal en base a lo que ofrezcas! 🎯 ¡Haz que cada transacción sea especial!
+                        </p>
                         <button type="button" class="btn-close" onclick="closeOptionModal()"></button>
                   </div>
                   <div>
                         <form id="optionForm">
                               <div class="mb-3">
-                                    <label for="optionName" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="optionName" required>
+                                    <!-- <label for="optionName" class="form-label">Nombre </label> -->
+                                    <input type="text" class="form-control"  value="{{sale.plan.name}}, opcional"  id="optionName" disabled>
                               </div>
                               <div class="mb-3">
-                                    <label for="optionDescription" class="form-label">Descripción</label>
-                                    <textarea class="form-control" id="optionDescription" rows="3" required></textarea>
+                                    <!-- <label for="optionDescription" class="form-label">Descripción</label> -->
+                                    <textarea  style="height: 8rem;" placeholder="Ejemplo: 4 fotografías de alta calidad, 2 cambios de vestimenta y un álbum exclusivo, etc..."  class="form-control p-4 " id="optionDescription" rows="3" required></textarea>
                               </div>
-                              <div class="mb-3">
-                                    <label for="optionPrice" class="form-label">Precio</label>
-                                    <input type="number" class="form-control" id="optionPrice" required>
+                              <div class="mb-2 d-flex  justify-content-end">
+                                    <!-- <label for="optionPrice" class="form-label">Precio</label> -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-currency-dollar mt-1" viewBox="0 0 16 16">
+                                          <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"/>
+                                        </svg>
+                                    <input type="text" class="form-control"  style="width: 9rem;" value="00" id="optionPrice" required>
+                                    <button type="button" class="btn btn-secondary position-absolute top-0 end-0  bg-transparent  border-0 me-2 ms-2 mt-2" onclick="OpenModalOption()">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+                                              </svg>
+                                    </button>
+                                    <button type="button" class="btn btn-primary  ms-2 rounded-5 border-0 bg-white bg-opacity-10"  style="width: 6rem; font-weight:  bold;"  onclick="createOption()">Crear </button>
                               </div>
+                              <script>
+                                    const input = document.getElementById("optionPrice");
+                                  
+                                    input.addEventListener("input", function () {
+                                      // Eliminar cualquier carácter que no sea número
+                                      let value = this.value.replace(/[^0-9]/g, "");
+                                      
+                                      // Formatear con comas
+                                      this.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                    });
+                                  </script>
                         </form>
-                  </div>
-                  <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-secondary me-2" onclick="OpenModalOption()">Cerrar</button>
-                        <button type="button" class="btn btn-primary" onclick="createOption()">Guardar</button>
                   </div>
             </div>
       </div>
 
 
-
+      <script>
+            function setDate() {
+                const dateElement = document.querySelector('.date');
+                const today = new Date();
+    
+                // Obtener día, mes y año
+                const day = today.getDate();
+                const month = today.getMonth() + 1; // Los meses van de 0 a 11
+                const year = today.getFullYear();
+    
+                // Formatear la fecha como "DD/MM/YYYY"
+                const formattedDate = `${day}/${month}/${year}`;
+    
+                // Establecer la fecha en el elemento
+                dateElement.textContent = formattedDate;
+            }
+    
+            // Llamar la función al cargar la página
+            setDate();
+        </script>
       <script>
             function createOption() {
                   const name = document.getElementById('optionName').value;
@@ -301,11 +533,124 @@ function OpenModalOption() {
       var optionModalElement = document.getElementById('optionModal2');
       if (optionModalElement.classList.contains('d-none')) {
             optionModalElement.classList.remove('d-none');
+            optionModalElement.classList.add('flip-center')
       } else {
             optionModalElement.classList.add('d-none');
       }
 
 }
+
+
+function printInvoice() {
+    const invoice = document.querySelector('.invoice').innerHTML; // Obtener el contenido del div
+    const newWindow = window.open('', '_blank'); // Abrir nueva ventana
+    newWindow.document.open();
+    newWindow.document.write(`
+        <html>
+            <head>
+                <title>Imprimir Factura</title>
+                <style>
+                    /* Agrega aquí tus estilos para la impresión */
+                    * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: Arial, sans-serif;
+      }
+
+      .invoice {
+          background: #ffffff;
+          width: 800px;
+          padding: 20px;
+          border-radius: 20px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          color: black;
+      }
+      .header, .footer {
+          text-align: start;
+          margin-bottom: 20px;
+      }
+      .header img {
+          max-width: 200px;
+          /* margin-bottom: 10px; */
+      }
+      .details {
+          margin-bottom: 20px;
+      }
+      .details p {
+          font-size: 14px;
+          margin-bottom: 5px;
+      }
+      .table-container {
+          margin-bottom: 20px;
+      }
+      table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+      table th, table td {
+          text-align: left;
+          border: 1px solid #f0f0f0;
+          padding: 10px;
+          font-size: 14px;
+      }
+      table th {
+          background: #f0f0f0;
+          font-weight: bold;
+      }
+      .observations {
+          margin-bottom: 20px;
+      }
+      .observations textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #e7e7e7;
+          background-color: #f0f0f0;
+          border-radius: 1rem;
+          font-size: 14px;
+          resize: none;
+      }
+      .totals {
+                  width: 100%; display: flex;
+                  justify-content-end: end;
+          }
+      .totals {
+          text-align: right;
+      }
+      .totals p {
+          font-size: 14px;
+          margin-bottom: 5px;
+      }
+      .totals p span {
+          font-weight: bold;
+      }
+
+      .credito-fiscal 
+      {
+                  text-align: center;
+                  margin-bottom: 1rem;
+                  padding 0.5rem;
+         
+      }
+
+        .credito-fiscal  hr 
+        {
+                           color: #f0f0f0;
+        }
+
+
+                </style>
+            </head>
+            <body>
+                ${invoice}
+            </body>
+        </html>
+    `);
+    newWindow.document.close();
+    newWindow.print(); // Iniciar el diálogo de impresión
+    newWindow.close(); // Cerrar la ventana tras imprimir
+}
+
 </script>
 
 {% endblock %}

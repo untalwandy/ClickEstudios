@@ -133,6 +133,36 @@
     animation: flip-down2 0.5s ease-out forwards;
     transform-origin: top; /* Punto de rotación */
 }
+
+
+.form-control 
+      {
+            color: white !important;
+            background: rgba(0, 0, 0, 0.468) !important;
+            border: 0px !important; border-radius: 2rem; height: 2.3rem;
+            outline: none !important;
+            padding: 1.5rem;
+            
+      }
+      .form-control::placeholder {
+            color: rgb(109, 109, 109) !important;
+      }
+
+
+      @keyframes animations-pulse {
+      0% {
+            transform: scale(1.2);
+      }
+      50% {
+            transform: scale(1.2);
+      }
+      100% {
+            transform: scale(1);
+      }
+}
+  .animations-pulse {
+  animation: animations-pulse 0.3s infinite;
+}
 </style>
 <div class="d-none">
       <input type="text" id="id_name">
@@ -142,10 +172,30 @@
 <div class="bg-black bg-opacity-50  vh-100 overflow-scroll p-0  " id="bg-admin" >
       <div class="border-0 ">
             {% include "citas/components/nav.html" %}
+
+            {% if cash_register.status == 'open' %}
                 <!-- Aquí va el contenido -->
-            <div  data-aos="fade-up" class="  p-3 w-100 border-0 h-100 align-content-start   d-flex flex-wrap overflow-auto  mb-5 pb-5 justify-content-center" style="width: max-content; " >
-                  <div class='w-100'>
-                        <div class="border-0 mt-2 ms-1  w-100" style='height: 2.5rem;'>
+            <div  data-aos="fade-up" class="   contanedor-admin  p-3 w-100 border-0 h-100 align-content-start   d-flex flex-wrap overflow-auto  mb-5 pb-5 justify-content-center" style="width: max-content; " >
+                  <div class="border-0 mt-2 ms-1  w-100" style='height: 2.5rem;'>
+                        <h6 class="w-100 font-secundary  d-flex" style="font-size: 14px;">
+                             <span class='ms-1'>
+                                    Registra una venta 
+                                    <p class=" text-white-50 font-secundary" 
+                                          style="font-size: 14px;">
+                                          ¿Sabías que puedes registrar una venta simple? ¡Pues sí, puedes! Esta venta será visible únicamente en la caja y en el historial de ClickEstudios
+                                    </p>
+                              </span>
+                        </h6>
+                  </div>
+                  <div class="d-flex w-100 ">
+                        <button type="button" class="btn btn-primary d-flex  ms-2 rounded-5 border-0 bg-white bg-opacity-10"  style="width: 8rem; font-weight:  bold; font-size: 14px;"  onclick="OpenModalOption()">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-heart-fill mt-1 me-1" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8.49 10.92C19.412 3.382 11.28-2.387 8 .986 4.719-2.387-3.413 3.382 7.51 10.92l-.234.468a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2 2 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.235-.468ZM6.726 1.269c-1.167-.61-2.8-.142-3.454 1.135-.237.463-.36 1.08-.202 1.85.055.27.467.197.527-.071.285-1.256 1.177-2.462 2.989-2.528.234-.008.348-.278.14-.386"/>
+                                  </svg>  Crear venta       
+                        </button>
+                  </div>
+                  <div class='w-100 mt-5'>
+                        <div class="border-0  ms-1  w-100" style='height: 2.5rem;'>
                               <h6 class="w-100 font-secundary  d-flex" style="font-size: 14px;">
                                    <span class='ms-1'>
                                           Citas agendadas
@@ -187,56 +237,140 @@
                         </h6>
                   </div>
 
-                  <section class='d-flex w-100'>
-                        <div class="bg-white bg-opacity-10 p-3 rounded-5"
-                              style="min-width: 22rem; min-height:14.5rem; height: max-content;">
-                              <strong class="mb-1 d-flex justify-content-center align-content-center flex-wrap">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history m-1" viewBox="0 0 16 16">
-                                    <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
-                                    <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
-                                    <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
-                                    </svg>
-                                    <span class="reloj me-2">
-
-                                    </span>
-                                    <!-- Listado de hoy -->
-                              </strong>
-                              <div style="font-size: 12px;  line-height: 14px;"
-                               class="text-white-50 mb-1 text-center">
-                                    Las citas estan ordenadas de  por orden de reloj
-                              </div>
-                              <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 20px;" class="">
-                                    <thead>
-                                        <tr>
-                                            <th style="border: 0px solid #ccc; border-top: 0px; border-left: 0px;
-                                            border-left: 0px;  padding: 8px; text-align: start;"
-                                            class="bg-black bg-opacity-25 rounded-5 ps-4  rounded-end-0" >Nombre</th>
-                                            <th style="border: 0px solid #ccc; padding: 8px; text-align: left;" 
-                                            class="bg-black bg-opacity-25 rounded-start-0 rounded-5">Hora</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="border: 0px solid #ccc; padding: 8px;">Julianny Satos De Araujo</td>
-                                            <td style="border: 0px solid #ccc; padding: 8px;">2:30 PM</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-
-                        </div>
+                  <section class='d-flex w-100 ' >
+                      
                         {% include "citas/administration/reservados.html" %}
                   </section>
 
 
                   {% include "citas/administration/profile.html" %}
             </div>
+             </div>
+
+
+      <div id="optionModal3" class=" d-none  position-fixed  top-0 start-0  w-100 vh-100  d-flex justify-content-center align-items-center">
+            <div class="bg-black bg-opacity-50  rounded-5 p-5   position-relative" style="width: 90%; max-width: 700px; z-index: 1000;      ">
+
+
+                  <div class="d-flex justify-content-center align-items-center flex-wrap">
+                        <div class="text-start w-100  clickestudios  d-flex justify-content-start  " >
+                              <!-- <svg id="recordin" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-record-fill animations-pulse m-0 text-danger " viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10"/>
+                                   </svg>  -->
+                              <h1    class="font-primary text-start   shadow-none" 
+                              style=" text-shadow: #000000ad 1px 1px 1px;          
+                               font-family: Kavoon, serif !important;
+                              font-weight: 800; font-size: 1.5rem;
+                              /* letter-spacing: 1px; */
+                              color: rgb(220, 220, 220);
+                              font-style: normal;">
+                                    ClickEstudios 
+                        </h1>
+                        </div> <br>
+                        <h5  style="font-weight: bold;" class="modal-title mt-4 text-white-50 title-click-venta text-start w-100"> </h5>  <br>
+                        <p class="text-white-50  text-start" style="font-size: 12px;">
+                        Registra una venta de manera sencilla, ideal para aquellas transacciones que no requieren un plan, servicios o paquetes en específico
+                        </p>
+
+                  </div>
+                  <div>
+                        <form id="optionForm" class="mt-4">
+                              <div class="mb-3 d-flex">
+                                    <!-- <label for="optionName" class="form-label">Nombre </label> -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-currency-dollar  text-white-50 me-1  mt-2" viewBox="0 0 16 16">
+                                        <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"/>
+                                      </svg>
+                                  <input type="text" class="form-control me-2"  style="width: 9rem;" value="500" id="optionPrice" required>
+                                    <input type="text" class="form-control"  placeholder="Ejemplo: Fotos 2x2"  id="optionName" >
+                                            <!-- <label for="optionPrice" class="form-label">Precio</label> -->
+                              </div>
+                              <div class="mb-3">
+                                    <!-- <label for="optionDescription" class="form-label">Descripción</label> -->
+                                    <textarea  style="height: 10rem;" 
+                                    placeholder="¡Se tomaron 10 fotos, 2X2 dividida entre cada detalle y profesionalismo  ClickEstudios 📸✨"  class="form-control p-4 " id="optionDescription" rows="3" required></textarea>
+                              </div>
+                              <div class=" d-flex  justify-content-end">
+                            
+                                    <button type="button" class="btn btn-secondary position-absolute top-0 end-0  bg-transparent  border-0 me-2 ms-2 mt-2" onclick="OpenModalOption()">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+                                              </svg>
+                                    </button>
+                                    <button type="button" class="btn btn-primary  ms-2 pt-2 pb-2 rounded-5 border-0 bg-white bg-opacity-10"  style="width: 8rem; font-weight:  bold;"  onclick="createOption()"> 
+                                          Crear venta      
+                                    </button>
+                              </div>
+                              <script>
+                                    const input = document.getElementById("optionPrice");
+                                  
+                                    input.addEventListener("input", function () {
+                                      // Eliminar cualquier carácter que no sea número
+                                      let value = this.value.replace(/[^0-9]/g, "");
+                                      
+                                      // Formatear con comas
+                                      this.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                    });
+                                  </script>
+                        </form>
+                  </div>
+            </div>
       </div>
+      {% else %}
+      <div  data-aos="fade-in" data-aos-easing="linear" data-aos-duration="1500"class="d-flex   justify-content-center flex-wrap align-content-center  w-100 vh-100">
+            <div 
+            class="bg-black p-3 text-center bg-opacity-50 position-relative rounded-5 mb-5"
+            style="width: 49rem; height: 28rem;">
+            <div  data-aos="fade-in" style="transition-delay: 1s !important;"  class="w-100 d-flex align-content-center flex-wrap">
+                  {% if company.logo.url %}
+                        <img src="{{company.logo2.url}}"  class="  start-0"  width="150"  alt="{{company.name}}">
+                  {% endif %}
+            <div   data-aos="fade-right" style="transition-delay: 1s !important;" class=" d-flex flex-wrap align-content-center"> 
+                  <div class="w-100 justify-content-end text-start">
+                        <strong class="text-white-50 me-1">  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                            </svg>   {{request.user.username}}</strong> 
+                  </div>
+                
+                <div  data-aos="fade-right" style="transition-delay: 1.5s !important;" class="w-100 text-start" >
+                  <strong class="text-white-50 me-1">  <svg xmlns="http://www.w3.org/2000/svg"
+                         width="10" height="10" fill="currentColor" class="bi bi-calendar3-event-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2h16a2 2 0 0 0-2-2zM0 14V3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2m12-8a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/>
+                      </svg>  {{request.user.date_joined}}</strong>
+   
+                </div>
+
+       
+      </div>
+            </div>
+       
+             <div  class="w-100 d-flex justify-content-center mb-2  mt-3"  >  
+                  <strong style="font-size: 16px;"   data-aos="fade-in" style="transition-delay: 2s !important;" class="text-white-50 text-center mt-3"> Estado de caja cerrada</strong>
+            </div>
+                  <p  data-aos="fade-in" style="font-size: 12px; transition-delay: 1s !important;" class="text-white-50 w-100 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info" viewBox="0 0 16 16">
+                              <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                            </svg>     Para garantizar el registro adecuado de las transacciones, como ventas y otras gestiones, es necesario abrir una nueva caja, esto asegura un control eficiente y transparente de las operaciones.
+                  </p>
+          
+                  <div data-aos="fade-right" class="w-100 d-flex justify-content-end m-0 start-0 pb-2 pe-2  position-absolute bottom-0" style="transition-delay: 4s !important;">
+                        <a  href="{% url "citas:caja" %}"  class='text-white-50  btn-opcions' style="cursor: pointer; font-weight: bold;" >
+                        <button style="font-size: 14px;"  class=" border-0 bg-white bg-opacity-10 p-2 pe-3 ps-3">
+                                     Abrir  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8m5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707z"/>
+                                  </svg>
+                              </button>
+                        </a>
+                  </div>
+            </div>
+      </div>
+      {% endif %}
+
+
 </div> 
 
 <script>
 
-      TextSession('Listado de citas')
+      TextSession(' Punto de venta (POS)')
       function OpenCalendary(d)
       {
             $('.calendary').toggleClass('d-none')
@@ -269,6 +403,45 @@ setInterval(RunClock, 1000);
 
 // Inicializar el reloj al cargar la página
 RunClock();
+
+
+
+function setRandomText() {
+      const messages = [
+    "Registra tu venta con el toque único de ClickEstudios.",
+    "Realiza una venta con la calidad y estilo que solo ClickEstudios puede ofrecer.",
+    "Haz tu venta con el sello exclusivo de ClickEstudios.",
+    "Registra tu transacción de manera impecable al estilo de ClickEstudios.",
+    "Cierra tu venta con la excelencia que caracteriza a ClickEstudios.",
+    "Registra cada venta con la precisión y profesionalismo de ClickEstudios.",
+    "Transforma cada venta en una experiencia única con ClickEstudios."
+  ];
+
+  // Selecciona un mensaje aleatorio
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+  // Inserta el mensaje en el elemento con clase .title-click-venta
+  const element = document.querySelector('.title-click-venta');
+  if (element) {
+    element.textContent = randomMessage;
+  }
+}
+
+// Llamar a la función cuando la página esté completamente cargada
+window.onload = setRandomText;
+
+function OpenModalOption() {
+      var optionModalElement = document.getElementById('optionModal3');
+      if (optionModalElement.classList.contains('d-none')) {
+            document.querySelector('.contanedor-admin').classList.add('d-none')
+            optionModalElement.classList.remove('d-none');
+            optionModalElement.classList.add('flip-center')
+      } else {
+            document.querySelector('.contanedor-admin').classList.remove('d-none')
+            optionModalElement.classList.add('d-none');
+      }
+
+}
 </script>
 
 {% endblock  %}

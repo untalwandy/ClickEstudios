@@ -74,9 +74,9 @@
                   <strong style="font-weight: 400; font-size: 13px;" class="">Total de gastos: </strong> ${{gastos_total|intcomma}}
             </p>
       </div>
-      <div  data-aos="fade-up" class="m-2 mt-0 rounded-3  d-flex justify-content-center bg-white bg-opacity-10   pt-1" style="min-height: 70vh; ">
+      <div  data-aos="fade-up" class="m-2 mt-0 rounded-5  d-flex justify-content-center bg-white bg-opacity-10   pt-1" style="min-height: 70vh; ">
         
-            <div class=" mt-1  p-2 m-2 rounded-4 bg-black bg-opacity-25 w-100">
+            <div class=" mt-1  p-2 m-2 rounded-5 bg-black bg-opacity-25 w-100">
                   <section class=" h-50 overflow-scroll  rounded-4 d-none p-2">
                         <table class="w-100">
                               {% if gastos_recurrentes %}
@@ -142,7 +142,7 @@
                         </tbody>
                          </table>
                   </section>
-                  <section class=" rounded-4 p-2 overflow-scroll">
+                  <section class=" rounded-5 p-2 overflow-scroll">
                         <table class="w-100">
                               {% if gastos_otros %}
                               <thead>
@@ -203,14 +203,22 @@
                         <div class="mb-1 text-white me-1 ">
                               
                               <label for="business_expense_type" class="f text-white" style="font-size: 12px;">Tipo de Gasto:</label>
-                              <select class=" bg-black text-white w-100  border-0 rounded-4 p-3 bg-opacity-25" id="business_expense_type" name="business_expense_type">
+                              <select class=" bg-black text-white w-100  border-0  p-3 bg-opacity-25"  style="outline: none; border-radius: 1.7rem;" id="business_expense_type" name="business_expense_type">
                                       <option class="text-white" value="Otro">Otro</option>
                                       <option class="text-white" value="Renta">Renta</option>
                                       <option class="text-white" value="Servicios">Servicios </option>
                                       <option class="text-white" value="Salarios">Salarios</option>
+                                      <option class="text-white" value="Productos"> Productos</option>
                                       <option class="text-white" value="Suministros">Suministros</option>
                                       <option class="text-white" value="Marketing">Marketing</option>
-                                      <option class="text-white" value="Mantenimiento">Mantenimiento</option>
+                                      <option class="text-white" value="Educación">Educación</option>
+                                    <option class="text-white" value="Transporte">Transporte</option>
+                                    <option class="text-white" value="Mantenimiento">Mantenimiento</option>
+                                    <option class="text-white" value="Impuestos">Impuestos</option>
+                                    <option class="text-white" value="Tecnología">Tecnología</option>
+                                    <option class="text-white" value="Entretenimiento">Entretenimiento</option>
+                                    <option class="text-white" value="Donaciones">Donaciones</option>
+                                    <option class="text-white" value="Capacitación">Capacitación</option>
                               </select>
                         </div>
       
@@ -222,7 +230,19 @@
                   {{ form.name }}
                  </div>
                   {{ form.description}}
-
+                  <style>
+                        #id_description
+                        {
+                              height: 10rem; border-radius: 1.8rem;
+                              padding-left: 1rem; padding-top: 1rem; 
+                              outline: none;
+                        }
+                        #id_gasto 
+                        {
+                              border-radius: 1.7rem !important; 
+                              padding-left: 1rem;outline: none;
+                        }
+                  </style>
                   <div class="form-check form-check-inline d-none ">
                         <input class="form-check-input" type="radio" name="financial_type" id="expense" value="expense" checked>
                         <label class="form-check-label text-white" for="expense">Gasto</label>
@@ -266,7 +286,7 @@
                                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
                                   </svg>      
                         </a>
-                        <button type="submit" class="btn bg-white bg-opacity-10 text-white mt-2 rounded-5">Guardar</button>
+                        <button type="submit" class="btn bg-black bg-opacity-25 text-white mt-2 rounded-5" style="font-weight: bold;">Guardar</button>
                   </div>
             </form>
       </div>

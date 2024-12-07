@@ -214,10 +214,13 @@ def DeletePaquetOption(request):
 
 def CreateOption(request):
       sale = models.Sale.objects.get(id=int(request.GET.get('saled_id')))
+      
+      if request.GET.get('price'):
+            price = int(request.GET.get('price').replace(',', '')) 
       options = models.Opciones(
             sale=sale,
             name = request.GET.get('name'),
-            preci = int(request.GET.get('price')),
+            preci = price,
             description = request.GET.get('description'),
             )
       options.save()
@@ -241,12 +244,13 @@ def CheckCitasToDay(request):
                   ]
             list_to_day_sale = []
             # Realiza la consulta usando el filtro adecuado
-            sale_to_day = models.Sale.objects.filter(cliente__date_choice=date_only)
-
+            sale_to_day = models.Sale.objects.filter(cliente__date_only_choice=date_only)
+            print(sale_to_day)
             if sale_to_day:
                   for to_day in sale_to_day:
                         # Verifica si la hora ya está en la lista
                         time_choice = to_day.cliente.date_time_choice.strftime('%H:%M')  # Formato de la hora, si es necesario
+
 
                         # Si la hora no está en la lista, la agrega
                         if not any(item['hors'] == time_choice for item in list_to_day_sale):

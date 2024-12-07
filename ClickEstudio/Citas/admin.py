@@ -23,3 +23,5 @@ admin.site.register(FinancialRecord)
 admin.site.register(Sale)
 admin.site.register(Opciones)
 admin.site.register(PackOpciones)
+
+admin.site.register(Company)

@@ -227,11 +227,16 @@ class CashRegister(models.Model):
         ('open', 'Abierta'),
         ('closed', 'Cerrada'),
     ]
+
+
     
     # Apertura y cierre de caja
     opened_by = models.ForeignKey(User, related_name='cash_opened', on_delete=models.SET_NULL, null=True)
     closed_by = models.ForeignKey(User, related_name='cash_closed', on_delete=models.SET_NULL, null=True, blank=True)
-    
+
+
+    number_caja = models.PositiveIntegerField(null=True, blank=True)  # Agregar el campo number_caja
+
     opening_balance = models.DecimalField(max_digits=10, decimal_places=2)  # Monto inicial en la caja
     closing_balance = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Monto final en la caja
 
@@ -241,6 +246,14 @@ class CashRegister(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='open')  # Estado actual de la caja
       
     date = models.DateTimeField(default=timezone.now) # Crear fecha atuacal
+
+
+    def save(self, *args, **kwargs):
+      if not self.number_caja:  # Si no tiene un número asignado, asignar uno.
+            self.number_caja = CashRegister.objects.count() + 1  # Contar y sumar 1
+      super().save(*args, **kwargs)
+    
+
     def __str__(self):
         return f'Caja {self.id} - {self.status}'
 
@@ -321,7 +334,7 @@ class Sale(models.Model):
       is_activate = models.BooleanField(default=True, blank=True, null=True)
       saled = models.BooleanField(default=False, blank=True, null=True)
 
-
+      date_only_choice = models.DateField(default=datetime.now, blank=True, null=True)
 
       saled_confirm = models.BooleanField(default=False, blank=True, null=True)
 
@@ -332,7 +345,7 @@ class Sale(models.Model):
       saled_end = models.BooleanField(default=False, blank=True, null=True)
 
       def __str__(self):
-            return f"Venta #vn00{self.id} {self.cliente} - {self.plan} - {self.date} - {'Vendido' if self.saled == True else 'No pagado'}" 
+            return f"Venta #vn00{self.id} {self.cliente} - {self.plan} - {self.cliente.date_only_choice} - {'Vendido' if self.saled == True else 'No pagado'}" 
 
 
 class Opciones(models.Model):
@@ -359,9 +372,11 @@ class PackOpciones(models.Model):
 
 
 class Company(models.Model):
+      # company =  models.ForeignKey(User, related_name='user_company', on_delete=models.CASCADE)
       name = models.CharField(max_length=255 , blank=True, null=True)
       description = models.TextField(blank=True, null=True )
       logo = models.ImageField(upload_to='media/', blank=True, null=True)
+      logo2 = models.ImageField(upload_to='media/', blank=True, null=True)
       date = models.DateTimeField(auto_now_add=True)
 
       def __str__(self):
